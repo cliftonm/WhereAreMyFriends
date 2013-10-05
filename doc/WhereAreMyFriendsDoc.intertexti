@@ -1,0 +1,241 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Notecards">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+                <xs:element name="TableOfContents" type="xs:string" minOccurs="0" />
+                <xs:element name="URL" type="xs:string" minOccurs="0" />
+                <xs:element name="HTML" type="xs:string" minOccurs="0" />
+                <xs:element name="Title" type="xs:string" default="Notecard" minOccurs="0" />
+                <xs:element name="IsOpen" type="xs:boolean" minOccurs="0" />
+                <xs:element name="IsChecked" type="xs:boolean" minOccurs="0" />
+                <xs:element name="DateCreated" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="DateModified" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="DateLastViewed" type="xs:dateTime" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="NotecardReferences">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+                <xs:element name="NotecardParentID" type="xs:int" />
+                <xs:element name="NotecardChildID" type="xs:int" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+                <xs:element name="NotecardID" type="xs:int" />
+                <xs:element name="Tag" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ApplicationData">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+                <xs:element name="LastViewedNotecardID" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//Notecards" />
+        <xs:field xpath="ID" />
+      </xs:unique>
+      <xs:unique name="NotecardReferences_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//NotecardReferences" />
+        <xs:field xpath="ID" />
+      </xs:unique>
+      <xs:unique name="Metadata_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//Metadata" />
+        <xs:field xpath="ID" />
+      </xs:unique>
+      <xs:keyref name="FK_Metadata_Notecard" refer="Constraint1">
+        <xs:selector xpath=".//Metadata" />
+        <xs:field xpath="NotecardID" />
+      </xs:keyref>
+      <xs:keyref name="FK_NotecardRef_Notecard2" refer="Constraint1">
+        <xs:selector xpath=".//NotecardReferences" />
+        <xs:field xpath="NotecardChildID" />
+      </xs:keyref>
+      <xs:keyref name="FK_NotecardRef_Notecard1" refer="Constraint1">
+        <xs:selector xpath=".//NotecardReferences" />
+        <xs:field xpath="NotecardParentID" />
+      </xs:keyref>
+    </xs:element>
+  </xs:schema>
+  <Notecards>
+    <ID>0</ID>
+    <TableOfContents>1. Git</TableOfContents>
+    <HTML>&lt;P&gt;Created the repository WhereAreMyFriends with a readme so I can clone the repository&lt;/P&gt;
+&lt;P&gt;from the command line, cloned the repository:&lt;/P&gt;
+&lt;P&gt;git clone &lt;A href="https://github.com/cliftonm/WhereAreMyFriends"&gt;https://github.com/cliftonm/WhereAreMyFriends&lt;/A&gt;&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
+    <Title>1. Git</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T18:45:00.6991102-04:00</DateCreated>
+    <DateModified>2013-10-05T18:52:18.0211236-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:07:26.6180924-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>1</ID>
+    <TableOfContents>1. Getting Started</TableOfContents>
+    <HTML>&lt;P&gt;This is a new notecard.&lt;/P&gt;</HTML>
+    <Title>1. Getting Started</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T18:52:03.5302948-04:00</DateCreated>
+    <DateModified>2013-10-05T19:06:39.9254217-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:08:57.7243033-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>2</ID>
+    <TableOfContents>2. Create the Rails App</TableOfContents>
+    <HTML>&lt;P&gt;From the command line, go to the parent directory of the repository.&amp;nbsp; In my case: &lt;/P&gt;
+&lt;P&gt;cd \rails-projects&lt;/P&gt;
+&lt;P&gt;Create the initial rails app:&lt;/P&gt;
+&lt;P&gt;rails new WhereAreMyFriends&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
+    <Title>2. Rails App</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T18:52:25.4005457-04:00</DateCreated>
+    <DateModified>2013-10-05T18:54:00.674995-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:07:38.7087839-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>3</ID>
+    <TableOfContents>3. Load the project in RubyMine</TableOfContents>
+    <HTML>&lt;P&gt;Launch RubyMine and close any open projects.&amp;nbsp; This presents you with the "recent projects" and "quick start" panels.&lt;/P&gt;
+&lt;P&gt;From "quick starts", select "Open Directory" and select the WhereAreMyFriends folder.&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
+    <Title>RubyMine</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T18:54:04.4772125-04:00</DateCreated>
+    <DateModified>2013-10-05T19:06:35.9811961-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:08:01.3440786-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>4</ID>
+    <TableOfContents>4. Verify Git Configuration in RubyMine</TableOfContents>
+    <HTML>&lt;P&gt;Configure RubyMine to use the Git repository.&lt;/P&gt;
+&lt;P&gt;From the File menu, select Settings..., then select Version Control&lt;/P&gt;
+&lt;P&gt;Make sure that the desired directory is using Git as the VCS.&amp;nbsp; It already should be.&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
+    <Title>Configure Git</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T18:56:53.7228928-04:00</DateCreated>
+    <DateModified>2013-10-05T19:08:56.0472074-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:08:16.9449709-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>5</ID>
+    <TableOfContents>2. Add necessary gems</TableOfContents>
+    <HTML>&lt;P&gt;Update the gemfile to include the various components we're going to use:&lt;/P&gt;
+&lt;P&gt;gem 'gmaps4rails'&lt;BR&gt;gem 'fql'&lt;BR&gt;gem 'slim'&lt;BR&gt;&lt;/P&gt;
+&lt;P&gt;gmaps4rails - for displaying a google map&lt;/P&gt;
+&lt;P&gt;fql - for querying Facebook&lt;/P&gt;
+&lt;P&gt;slim - for a lightweight replacement for HTML tags.&lt;/P&gt;
+&lt;P&gt;From the Tools menu in RubyMine, select Bunder... then Install, then click the Install button (no optional arguments)&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
+    <Title>Gemfile</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T19:01:49.4528076-04:00</DateCreated>
+    <DateModified>2013-10-05T19:06:29.9348503-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:24:28.2485263-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>7</ID>
+    <TableOfContents>5. Edit the .gitignore file</TableOfContents>
+    <HTML>&lt;P&gt;Edit the gitignore file, adding:&lt;/P&gt;
+&lt;P&gt;/idea/*&lt;/P&gt;
+&lt;P&gt;so that RubyMine files are not added to the repository&lt;/P&gt;</HTML>
+    <Title>Edit .gitignore file</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T19:08:59.4994049-04:00</DateCreated>
+    <DateModified>2013-10-05T19:09:20.4696043-04:00</DateModified>
+  </Notecards>
+  <Notecards>
+    <ID>8</ID>
+    <TableOfContents>3. Create Our Basic Page And Controller</TableOfContents>
+    <HTML>&lt;P&gt;From the command line (the RubyMine tools -&amp;gt; run rails generator isn't happy with this format):&lt;/P&gt;
+&lt;P&gt;type "rails generate controller map_my_friends index"&lt;/P&gt;
+&lt;P&gt;This generates a controller and a view folder with an index.html.erb page.&lt;/P&gt;
+&lt;P&gt;Delete the index.html.erb file.&amp;nbsp; Create a new file called "index.html.slim" and for the contents, create a stub:&lt;/P&gt;
+&lt;P&gt;p Google map goes here.&lt;/P&gt;
+&lt;P&gt;Open the routes.rb file in the config folder and add the line:&lt;/P&gt;
+&lt;P&gt;root to: "map_my_friends/index"&lt;/P&gt;
+&lt;P&gt;Run the application and in your browser, go to localhost:3000&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
+    <Title>Create our basic page and controller</Title>
+    <IsOpen>true</IsOpen>
+    <DateCreated>2013-10-05T19:10:33.982809-04:00</DateCreated>
+    <DateModified>2013-10-05T19:20:38.3513769-04:00</DateModified>
+    <DateLastViewed>2013-10-05T19:24:41.4012786-04:00</DateLastViewed>
+  </Notecards>
+  <NotecardReferences>
+    <ID>0</ID>
+    <NotecardParentID>1</NotecardParentID>
+    <NotecardChildID>0</NotecardChildID>
+  </NotecardReferences>
+  <NotecardReferences>
+    <ID>1</ID>
+    <NotecardParentID>1</NotecardParentID>
+    <NotecardChildID>2</NotecardChildID>
+  </NotecardReferences>
+  <NotecardReferences>
+    <ID>2</ID>
+    <NotecardParentID>1</NotecardParentID>
+    <NotecardChildID>3</NotecardChildID>
+  </NotecardReferences>
+  <NotecardReferences>
+    <ID>3</ID>
+    <NotecardParentID>1</NotecardParentID>
+    <NotecardChildID>4</NotecardChildID>
+  </NotecardReferences>
+  <NotecardReferences>
+    <ID>4</ID>
+    <NotecardParentID>1</NotecardParentID>
+    <NotecardChildID>7</NotecardChildID>
+  </NotecardReferences>
+  <Metadata>
+    <ID>0</ID>
+    <NotecardID>0</NotecardID>
+    <Tag>create repository</Tag>
+  </Metadata>
+  <Metadata>
+    <ID>1</ID>
+    <NotecardID>0</NotecardID>
+    <Tag>clone</Tag>
+  </Metadata>
+  <Metadata>
+    <ID>2</ID>
+    <NotecardID>2</NotecardID>
+    <Tag>initial rails application</Tag>
+  </Metadata>
+  <Metadata>
+    <ID>3</ID>
+    <NotecardID>3</NotecardID>
+    <Tag>RubyMine</Tag>
+  </Metadata>
+  <Metadata>
+    <ID>5</ID>
+    <NotecardID>4</NotecardID>
+    <Tag>gitignore</Tag>
+  </Metadata>
+  <ApplicationData>
+    <ID>0</ID>
+    <LastViewedNotecardID>8</LastViewedNotecardID>
+  </ApplicationData>
+</NewDataSet>
