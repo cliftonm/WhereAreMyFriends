@@ -1,0 +1,233 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Mapping Your Facebook Friends Wi</title>
+</head>
+
+<body>
+
+<h2>Mapping Your Facebook Friends With Google Map</h2>
+<p>A Rails Application</p>
+<p><img border="0" src="screenshot.png" width="625" height="491"></p>
+<h2>Introduction</h2>
+<p>I've been working on a project involving Facebook authentication and 
+embedding &quot;likes&quot; and &quot;posts&quot;, as well as mapping locations of crowdfunding 
+projects onto Google Maps.&nbsp; A few days ago I though, gee, what if I could 
+map my Facebook friends locations on Google Maps.&nbsp; Turns out
+<a href="http://geographics.cz/socialMap/">this has already been done</a>, but 
+that doesn't stop me from wanting to learn <i>how</i> it's done!&nbsp; This 
+article walks you through the process of creating your very own &quot;Where Are My 
+Friends&quot; web application with Ruby on Rails.</p>
+<h3>Prerequisites For Ruby on Rails Development in Windows</h3>
+<p>Since we're mostly Windows developers on Code Project, let's stay in the 
+Windows platform environment.&nbsp; To do this, you'll need to:</p>
+<ol>
+	<li>Download and install <a href="http://railsinstaller.org/en">
+	RailsInstaller</a></li>
+	<li>Download and install a decent IDE, namely
+	<a href="http://www.jetbrains.com/ruby/">RubyMine</a> (there's a 30 day 
+	trial version, but it's quite affordable and quite excellent)</li>
+</ol>
+<h3>Prerequisites For Facebook Development</h3>
+<p>You'll need to create an app from your Facebook account.&nbsp; To do this 
+(note that the UI might change over time), log in to Facebook and, from the 
+&quot;gear&quot; pulldown, select &quot;Create App&quot;:</p>
+<p><img border="0" src="fb1.png" width="213" height="291"></p>
+<p>Create an application, providing:</p>
+<ul>
+	<li>a unique app namespace</li>
+	<li>set the Site Domain to &quot;localhost&quot;</li>
+	<li>set the Site URL to <a href="http://localhost:3000/">
+	http://localhost:3000/</a></li>
+	<li>Sandbox mode should be enabled</li>
+</ul>
+<p>Once you've completed the process, you will be provided with an App ID and 
+App Secret.&nbsp; You'll need these for obtaining a user access token later on.</p>
+<h3>Prerequisites for GitHub</h3>
+<p>This part is optional.&nbsp; The source code for this project is available on 
+GitHub at <a href="https://github.com/cliftonm/WhereAreMyFriends">
+WhereAreMyFriends</a>.&nbsp; If you want to set up your own GitHub project, this 
+is what I did:</p>
+<ul>
+	<li>If you don't already have a GitHub account, create one</li>
+	<li>Create a new repository with a readme so you can immediately clone the 
+	repository</li>
+	<li>From the command line, clone the repository into the desired folder.&nbsp; 
+	I cloned mine using &quot;git clone
+	<a href="https://github.com/cliftonm/WhereAreMyFriends">
+	https://github.com/cliftonm/WhereAreMyFriends</a>&quot;</li>
+	<li>You can also simply clone my repository and use the code that I wrote, 
+	but you won't be able to commit any changes back to me.&nbsp; For that, 
+	you'd need to fork my repository and then issue &quot;pull requests&quot; if you want 
+	me to incorporate some changes in my project that you've made.</li>
+</ul>
+<h3>Prerequisites for Using Git</h3>
+<p>Git is an abomination to use from the command line, at least for those coming 
+from a strong visual tool bias like me.&nbsp; I strongly suggest you use a 
+visual tool such as <a href="http://www.syntevo.com/smartgithg/">SmartGit/Hg</a>, which I've found 
+to be the best of the various visual tools for Git.&nbsp; </p>
+<h2>Getting Started</h2>
+<p>We've got a few housekeeping things to take care of before we get started 
+with actual coding.</p>
+<h3>Creating the Initial Rails App</h3>
+<p>If you've cloned my repository, ignore this step, as you can simply open the 
+directory in RubyMine.</p>
+<p>If you're starting from a blank slate because you want to walk through how I 
+wrote this app, then you'll need to create a Rails app.&nbsp; Again, from the 
+command line, go to the parent directory into which you create the directory and 
+contents for the project.&nbsp; If you've cloned a blank repository from GitHub, 
+don't worry, just do this as well.</p>
+<p>From the command line, type in &quot;rails new WhereAreMyFriends&quot; (or, if you gave 
+your project a different name, use that name.)&nbsp; This will create all the 
+pieces for a Ruby on Rails application.</p>
+<p>In the RubyMine IDE, you should now see something like this when you open the 
+directory:</p>
+<p><img border="0" src="rubymine1.png" width="334" height="494"></p>
+<p>If you've cloned a Git repository, RubyMine should already be configured to 
+use Git as the VCS.&nbsp; Personally, I much prefer using SmartGit/Hg, but you 
+should know that RubyMine has built-in Git support.</p>
+<h3>Prequisites for Querying Facebook For Testing Purposes</h3>
+<p>A user access token is needed to obtain the friend location and hometown, 
+which we use to map where our friends are.&nbsp; For testing purposes, we can 
+acquire this token manually, but beware that it expires every two hours, so you 
+will have to repeat this step if you get a &quot;token expired&quot; error.</p>
+<p>Go to <a href="https://developers.facebook.com/tools/explorer">
+https://developers.facebook.com/tools/explorer</a></p>
+<p>Then click on Get Access Token.&nbsp; A popup will appear, from which you 
+should select &quot;Friends Data Permissions&quot; and then check &quot;friends_hometown&quot; and &quot;friends_location&quot;:</p>
+<p><img border="0" src="fb3.png" width="551" height="352"></p>
+<p>Click on Get Access Token, which closes the dialog and now your access token 
+will be displayed in the Graph API Explorer.&nbsp; You can copy this access 
+token into your code for temporary access when testing the application.</p>
+<h4>Test the Query</h4>
+<p>While we're here, we might as well test the query we'll be using.&nbsp; Click on &quot;FQL Query&quot; 
+and enter:</p>
+<pre>SELECT uid, name, pic_square, current_address, current_location, 
+hometown_location FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = 
+me())</pre>
+<p>Then click the Submit button.&nbsp; You should see an array returned, and if 
+you're friends entered information as to where they are living and/or their 
+hometown and make this information public, then you should see something along 
+the lines of:</p>
+<p><img border="0" src="fb2.png" width="535" height="395"></p>
+<p>We'll be parsing these records later in Ruby.</p>
+<h3>We Want Git to Ignore RubyMine Files</h3>
+<p>We don't want all the RubyMine IDE files to be part of the repository, so 
+open the &quot;.gitignore&quot; file (in the application's root folder) and add:</p>
+<pre>/.idea</pre>
+<p>which excludes the entire .idea folder that RubyMine creates.</p>
+<h3>Components (Gems) We'll be Using</h3>
+<p>We need to pull in a few components, so edit the Gemfile (in root of your 
+application folder), adding:</p>
+<pre>gem 'gmaps4rails'
+gem 'fql'
+gem 'slim'
+gem 'thin'</pre>
+<p>Once the Gemfile is updated, click on the Tools menu is RubyMine, then select 
+&quot;Bundler...&quot; then &quot;Install&quot;, then click on the Install button (leaving the 
+optional arguments blank.)&nbsp; This installs the gems and any dependencies 
+that they have.</p>
+<p>What are all these gems?</p>
+<h4>gmaps4rails</h4>
+<p><a href="https://github.com/apneadiving/Google-Maps-for-Rails">This is the 
+gem</a> for interfacing to Google Maps (as well as others, such as OpenLayers, 
+Bing, and Mapquest.)</p>
+<h4>fql</h4>
+<p><a href="https://github.com/mcls/fql">This gem</a> supports using the 
+Facebook Query Language in Ruby, which I use to query the locations of my 
+friends.&nbsp; There are other options as well and other techniques for querying 
+Facebook, but this is the approach I've chosen.</p>
+<h4>slim</h4>
+<p><a href="https://github.com/slim-template/slim">This gem</a>, from the 
+website: &quot;is a template language whose goal is [to] reduce the syntax of 
+essential parts without becoming cryptic.&quot;&nbsp; I find it makes HTML a lot more 
+readable, de-cluttering the angle brackets, closing tags, etc.</p>
+<h4>thin</h4>
+<p><a href="https://github.com/macournoyer/thin/">This gem</a> is a much faster web server than the default, which is WEBrick</p>
+<h3>Add All The Pieces Needed For Gmaps</h3>
+<p>The gmaps4rails gem includes an installer that adds all the javascript and 
+css that you need for actually displaying a map.&nbsp; To do this, open a 
+command line prompt and cd to your application folder.&nbsp; Then type:</p>
+<pre>rails generate gmaps4rails:install</pre>
+<h3>Create The Page Controller</h3>
+<p>While we're on the command line, let's create the controller and view.&nbsp; 
+Type:</p>
+<pre>rails generate controller map_my_friends index</pre>
+<p>This creates:</p>
+<ul>
+	<li>the file &quot;map_my_friends_controller.rb&quot; in the app\controllers folder.</li>
+	<li>the folder &quot;map_my_friends&quot; in the app\views folder.</li>
+	<li>the file &quot;index.html.erb&quot; in the app\views\map_my_friends&quot; folder.</li>
+</ul>
+<p>Delete the &quot;index.html.erb&quot; file and create a new file called &quot;index.html.slim&quot;, 
+so that we're using the slim HTML syntax rather than straight HTML.</p>
+<p>You should see something like this now in your project tree:</p>
+<p><img border="0" src="rubymine2.png" width="233" height="199"></p>
+<h2>Start Coding!</h2>
+<p>Now we're ready to do some coding.&nbsp; First, we're going to create a basic 
+model, &quot;Friend&quot;, to hold the information about our friends.&nbsp; We could do 
+this with a generator similar to how we created the controller, but because it's 
+not a vanilla solution, I prefer to simply create the file manually.</p>
+<h3>Create The 'Friend' Model</h3>
+<p>In RubyMine, under the app\models folder, create the file &quot;friend.rb&quot;:</p>
+<pre>class Friend &lt; ActiveRecord::Base
+  acts_as_gmappable
+
+  # Fields we get from FB
+  attr_accessible :uid, :name, :pic, :address
+  # Fields required by gmaps4rails (lat and long also come from FB)
+  attr_accessible :gmaps, :latitude, :longitude
+
+  # gmaps4rails methods
+  def gmaps4rails_address
+    address
+  end
+
+  def gmaps4rails_infowindow
+    &quot;#{name}&quot;
+  end
+end</pre>
+<p>The line &quot;acts_as_gmappable&quot; is a hook that generates latitude and longitude 
+data when an address is persisted.&nbsp; While it wasn't my intention to even 
+have a persisting Friend model, the gmaps4rails gem is somewhat coupled with the 
+Rails ActiveRecord and the five minutes I spent googling and playing around 
+trying to decouple it, without success, was five minutes more than I wanted to 
+spend on the issue, so as a result, we have a persistable Friend model.</p>
+<h4>Create The 'Friend' Table</h4>
+<p>No model is usually complete without its associated table, so we will use a 
+database migration to create the table.&nbsp; Since we're using sqlite3 as the 
+database, there's no need to futz around with database authentication issues, 
+database servers, etc.</p>
+<p>In RubyMine, in the &quot;db&quot; folder, create a sub-folder called &quot;migrate&quot;, and in 
+that folder, create a file called &quot;001_create_friends_table.rb&quot;:</p>
+<pre>class CreateFriendsTable &lt; ActiveRecord::Migration
+  def change
+    create_table :friends do |t|
+      t.string :uid
+      t.string :name
+      t.string :pic
+      t.string :address
+      t.float :latitude
+      t.float :longitude
+      t.boolean :gmaps
+      t.timestamps
+    end
+  end
+end</pre>
+<p>Your project tree should now reflect these two new files:</p>
+<p><img border="0" src="rubymine3.png" width="272" height="180"></p>
+<p>Now, run the migration by pressing Ctrl+F9, or right-clicking on the 
+migration and from the popup menu selecting &quot;run db:migrate&quot;.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+
+</html>
