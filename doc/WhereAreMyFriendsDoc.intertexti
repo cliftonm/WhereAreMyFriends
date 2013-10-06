@@ -85,17 +85,17 @@
     <IsOpen>true</IsOpen>
     <DateCreated>2013-10-05T18:45:00.6991102-04:00</DateCreated>
     <DateModified>2013-10-05T18:52:18.0211236-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:07:26.6180924-04:00</DateLastViewed>
+    <DateLastViewed>2013-10-05T21:50:17.4419515-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>1</ID>
     <TableOfContents>1. Getting Started</TableOfContents>
     <HTML>&lt;P&gt;This is a new notecard.&lt;/P&gt;</HTML>
     <Title>1. Getting Started</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T18:52:03.5302948-04:00</DateCreated>
     <DateModified>2013-10-05T19:06:39.9254217-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:08:57.7243033-04:00</DateLastViewed>
+    <DateLastViewed>2013-10-05T21:50:13.9787534-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>2</ID>
@@ -106,10 +106,10 @@
 &lt;P&gt;rails new WhereAreMyFriends&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
     <Title>2. Rails App</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T18:52:25.4005457-04:00</DateCreated>
     <DateModified>2013-10-05T18:54:00.674995-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:07:38.7087839-04:00</DateLastViewed>
+    <DateLastViewed>2013-10-05T21:50:16.8349168-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>3</ID>
@@ -118,10 +118,10 @@
 &lt;P&gt;From "quick starts", select "Open Directory" and select the WhereAreMyFriends folder.&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
     <Title>RubyMine</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T18:54:04.4772125-04:00</DateCreated>
     <DateModified>2013-10-05T19:06:35.9811961-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:08:01.3440786-04:00</DateLastViewed>
+    <DateLastViewed>2013-10-05T21:50:15.6028463-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>4</ID>
@@ -132,27 +132,28 @@
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
     <Title>Configure Git</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T18:56:53.7228928-04:00</DateCreated>
     <DateModified>2013-10-05T19:08:56.0472074-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:08:16.9449709-04:00</DateLastViewed>
+    <DateLastViewed>2013-10-05T21:50:15.0828166-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>5</ID>
     <TableOfContents>2. Add necessary gems</TableOfContents>
     <HTML>&lt;P&gt;Update the gemfile to include the various components we're going to use:&lt;/P&gt;
-&lt;P&gt;gem 'gmaps4rails'&lt;BR&gt;gem 'fql'&lt;BR&gt;gem 'slim'&lt;BR&gt;&lt;/P&gt;
+&lt;P&gt;gem 'gmaps4rails'&lt;BR&gt;gem 'fql'&lt;BR&gt;gem 'slim'&lt;BR&gt;gem 'thin'&lt;BR&gt;&lt;/P&gt;
 &lt;P&gt;gmaps4rails - for displaying a google map&lt;/P&gt;
 &lt;P&gt;fql - for querying Facebook&lt;/P&gt;
 &lt;P&gt;slim - for a lightweight replacement for HTML tags.&lt;/P&gt;
+&lt;P&gt;thin - a much faster web server than the default, which is WEBrick&lt;/P&gt;
 &lt;P&gt;From the Tools menu in RubyMine, select Bunder... then Install, then click the Install button (no optional arguments)&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
     <Title>Gemfile</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T19:01:49.4528076-04:00</DateCreated>
-    <DateModified>2013-10-05T19:06:29.9348503-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:24:28.2485263-04:00</DateLastViewed>
+    <DateModified>2013-10-05T19:29:12.4997845-04:00</DateModified>
+    <DateLastViewed>2013-10-05T21:50:12.7226816-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>7</ID>
@@ -161,28 +162,69 @@
 &lt;P&gt;/idea/*&lt;/P&gt;
 &lt;P&gt;so that RubyMine files are not added to the repository&lt;/P&gt;</HTML>
     <Title>Edit .gitignore file</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T19:08:59.4994049-04:00</DateCreated>
     <DateModified>2013-10-05T19:09:20.4696043-04:00</DateModified>
+    <DateLastViewed>2013-10-05T21:50:13.4427228-04:00</DateLastViewed>
   </Notecards>
   <Notecards>
     <ID>8</ID>
     <TableOfContents>3. Create Our Basic Page And Controller</TableOfContents>
-    <HTML>&lt;P&gt;From the command line (the RubyMine tools -&amp;gt; run rails generator isn't happy with this format):&lt;/P&gt;
+    <HTML>&lt;P&gt;Delete the public/index.html file so we don't get the "Welcome aboard" message from Rails.&lt;/P&gt;
+&lt;P&gt;From the command line (the RubyMine tools -&amp;gt; run rails generator isn't happy with this format):&lt;/P&gt;
 &lt;P&gt;type "rails generate controller map_my_friends index"&lt;/P&gt;
 &lt;P&gt;This generates a controller and a view folder with an index.html.erb page.&lt;/P&gt;
 &lt;P&gt;Delete the index.html.erb file.&amp;nbsp; Create a new file called "index.html.slim" and for the contents, create a stub:&lt;/P&gt;
 &lt;P&gt;p Google map goes here.&lt;/P&gt;
 &lt;P&gt;Open the routes.rb file in the config folder and add the line:&lt;/P&gt;
-&lt;P&gt;root to: "map_my_friends/index"&lt;/P&gt;
+&lt;P&gt;root to: "map_my_friends#index"&lt;/P&gt;
+&lt;P&gt;This maps the root to the map_my_friends controller, the index method, and uses the index.html.slim file in the views\map_my_friends folder.&lt;/P&gt;
 &lt;P&gt;Run the application and in your browser, go to localhost:3000&lt;/P&gt;
+&lt;P&gt;You should see:&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;
 &lt;P&gt;&amp;nbsp;&lt;/P&gt;</HTML>
     <Title>Create our basic page and controller</Title>
-    <IsOpen>true</IsOpen>
+    <IsOpen>false</IsOpen>
     <DateCreated>2013-10-05T19:10:33.982809-04:00</DateCreated>
-    <DateModified>2013-10-05T19:20:38.3513769-04:00</DateModified>
-    <DateLastViewed>2013-10-05T19:24:41.4012786-04:00</DateLastViewed>
+    <DateModified>2013-10-05T21:50:04.8432309-04:00</DateModified>
+    <DateLastViewed>2013-10-05T21:50:00.5659863-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>9</ID>
+    <TableOfContents>6. Test our Fql Query</TableOfContents>
+    <HTML>&lt;P&gt;From the RubyMine Tools menu, select "Run Rails Console".&lt;/P&gt;
+&lt;P&gt;When it fiinishes initializing, try this:&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;PRE&gt;&lt;CODE&gt;&lt;PRE&gt;&lt;SPAN class=n&gt;options&lt;/SPAN&gt; &lt;SPAN class=o&gt;=&lt;/SPAN&gt; &lt;SPAN class=p&gt;{&lt;/SPAN&gt; &lt;SPAN class=ss&gt;access_token:&lt;/SPAN&gt; ...&lt;SPAN class=p&gt;}&lt;/SPAN&gt;&lt;/PRE&gt;&lt;/CODE&gt;&lt;/PRE&gt;&lt;PRE&gt;&lt;CODE&gt;Fql.execute("SELECT uid, name, pic_square, current_location, hometown_location FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me())", options)&lt;/CODE&gt;&lt;/PRE&gt;&lt;PRE&gt;&lt;CODE&gt;&lt;/CODE&gt;&amp;nbsp;&lt;/PRE&gt;&lt;PRE&gt;&lt;CODE&gt;&lt;PRE&gt;&lt;SPAN class=p&gt;The FQL reference is here: &lt;A href="https://developers.facebook.com/docs/reference/fql/"&gt;https://developers.facebook.com/docs/reference/fql/&lt;/A&gt;&lt;/SPAN&gt;&lt;/PRE&gt;&lt;PRE&gt;&lt;SPAN class=p&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/PRE&gt;&lt;PRE&gt;&lt;SPAN class=p&gt;The user table is documented here: &lt;A href="https://developers.facebook.com/docs/reference/fql/user"&gt;https://developers.facebook.com/docs/reference/fql/user&lt;/A&gt;&lt;/SPAN&gt;&lt;/PRE&gt;&lt;PRE&gt;&lt;SPAN class=p&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/PRE&gt;&lt;PRE&gt;&lt;SPAN class=p&gt;&lt;PRE&gt;&amp;nbsp;&lt;/PRE&gt;&lt;/SPAN&gt;&lt;/PRE&gt;&lt;/CODE&gt;&lt;/PRE&gt;</HTML>
+    <Title>6. Test our Fql Query</Title>
+    <IsOpen>false</IsOpen>
+    <DateCreated>2013-10-05T20:00:34.1834107-04:00</DateCreated>
+    <DateModified>2013-10-05T21:48:11.691759-04:00</DateModified>
+    <DateLastViewed>2013-10-05T21:50:06.8043431-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>10</ID>
+    <TableOfContents>4. Create a Facebook App</TableOfContents>
+    <HTML>&lt;P&gt;You will need to create a Facebook app, which will give you your:&lt;/P&gt;
+&lt;P&gt;App ID:&lt;/P&gt;
+&lt;P&gt;App Secret:&lt;/P&gt;
+&lt;P&gt;Then, go to this page:&lt;/P&gt;&lt;PRE&gt;&lt;A href="https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&amp;amp;client_id=[app-id]&amp;amp;client_secret=[app-secret"&gt;https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&amp;amp;client_id=[app-id]&amp;amp;client_secret=[app-secret&lt;/A&gt;]&lt;/PRE&gt;&lt;PRE&gt;to get your access token.&lt;/PRE&gt;&lt;PRE&gt;or, go to the Graph Explorer and click on the "Get Access Token" button.&lt;/PRE&gt;&lt;PRE&gt;You'll want to select user permissions, such as email and user_likes.&lt;/PRE&gt;&lt;PRE&gt;&lt;STRONG&gt;Make sure you include user_location from User Data Permissions and frends_location from Friends Data Permissions&lt;/STRONG&gt;&lt;/PRE&gt;&lt;PRE&gt;&amp;nbsp;&lt;/PRE&gt;</HTML>
+    <Title>4. Create a Facebook App</Title>
+    <IsOpen>false</IsOpen>
+    <DateCreated>2013-10-05T20:12:00.9376908-04:00</DateCreated>
+    <DateModified>2013-10-05T21:50:11.697623-04:00</DateModified>
+    <DateLastViewed>2013-10-05T21:50:09.5264988-04:00</DateLastViewed>
+  </Notecards>
+  <Notecards>
+    <ID>12</ID>
+    <TableOfContents>5. SSL Certificate</TableOfContents>
+    <HTML>&lt;P&gt;Do what it says in this link: &lt;A href="http://stackoverflow.com/questions/5720484/how-to-solve-certificate-verify-failed-on-windows"&gt;http://stackoverflow.com/questions/5720484/how-to-solve-certificate-verify-failed-on-windows&lt;/A&gt;&lt;/P&gt;
+&lt;P&gt;download the cacert.pem&lt;/P&gt;</HTML>
+    <Title>5. SSL Certificate</Title>
+    <IsOpen>false</IsOpen>
+    <DateCreated>2013-10-05T21:47:03.4658567-04:00</DateCreated>
+    <DateModified>2013-10-05T21:47:29.6553547-04:00</DateModified>
+    <DateLastViewed>2013-10-05T21:50:08.8034574-04:00</DateLastViewed>
   </Notecards>
   <NotecardReferences>
     <ID>0</ID>
@@ -236,6 +278,6 @@
   </Metadata>
   <ApplicationData>
     <ID>0</ID>
-    <LastViewedNotecardID>8</LastViewedNotecardID>
+    <LastViewedNotecardID>0</LastViewedNotecardID>
   </ApplicationData>
 </NewDataSet>
