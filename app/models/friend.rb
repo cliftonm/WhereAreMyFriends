@@ -2,7 +2,7 @@ class Friend < ActiveRecord::Base
   acts_as_gmappable
 
   # Fields we get from FB
-  attr_accessible :uid, :name, :pic, :address
+  attr_accessible :uid, :name, :pic, :address, :profile_url
   # Fields required by gmaps4rails (lat and long also come from FB)
   attr_accessible :gmaps, :latitude, :longitude
 
@@ -12,6 +12,6 @@ class Friend < ActiveRecord::Base
   end
 
   def gmaps4rails_infowindow
-    "#{name}"
+    "<p><a href = '#{profile_url}' target='_blank'>#{name}</a><br>#{address}<br><img src = '#{pic}'/></p>"
   end
 end

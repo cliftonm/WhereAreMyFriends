@@ -9,7 +9,7 @@
 <body>
 
 <h2>Mapping Your Facebook Friends With Google Map</h2>
-<p>A Rails Application</p>
+<p>A Ruby on Rails Application</p>
 <p><img border="0" src="screenshot.png" width="625" height="491"></p>
 <h2>Introduction</h2>
 <p>I've been working on a project involving Facebook authentication and 
@@ -45,49 +45,6 @@ Windows platform environment.&nbsp; To do this, you'll need to:</p>
 </ul>
 <p>Once you've completed the process, you will be provided with an App ID and 
 App Secret.&nbsp; You'll need these for obtaining a user access token later on.</p>
-<h3>Prerequisites for GitHub</h3>
-<p>This part is optional.&nbsp; The source code for this project is available on 
-GitHub at <a href="https://github.com/cliftonm/WhereAreMyFriends">
-WhereAreMyFriends</a>.&nbsp; If you want to set up your own GitHub project, this 
-is what I did:</p>
-<ul>
-	<li>If you don't already have a GitHub account, create one</li>
-	<li>Create a new repository with a readme so you can immediately clone the 
-	repository</li>
-	<li>From the command line, clone the repository into the desired folder.&nbsp; 
-	I cloned mine using &quot;git clone
-	<a href="https://github.com/cliftonm/WhereAreMyFriends">
-	https://github.com/cliftonm/WhereAreMyFriends</a>&quot;</li>
-	<li>You can also simply clone my repository and use the code that I wrote, 
-	but you won't be able to commit any changes back to me.&nbsp; For that, 
-	you'd need to fork my repository and then issue &quot;pull requests&quot; if you want 
-	me to incorporate some changes in my project that you've made.</li>
-</ul>
-<h3>Prerequisites for Using Git</h3>
-<p>Git is an abomination to use from the command line, at least for those coming 
-from a strong visual tool bias like me.&nbsp; I strongly suggest you use a 
-visual tool such as <a href="http://www.syntevo.com/smartgithg/">SmartGit/Hg</a>, which I've found 
-to be the best of the various visual tools for Git.&nbsp; </p>
-<h2>Getting Started</h2>
-<p>We've got a few housekeeping things to take care of before we get started 
-with actual coding.</p>
-<h3>Creating the Initial Rails App</h3>
-<p>If you've cloned my repository, ignore this step, as you can simply open the 
-directory in RubyMine.</p>
-<p>If you're starting from a blank slate because you want to walk through how I 
-wrote this app, then you'll need to create a Rails app.&nbsp; Again, from the 
-command line, go to the parent directory into which you create the directory and 
-contents for the project.&nbsp; If you've cloned a blank repository from GitHub, 
-don't worry, just do this as well.</p>
-<p>From the command line, type in &quot;rails new WhereAreMyFriends&quot; (or, if you gave 
-your project a different name, use that name.)&nbsp; This will create all the 
-pieces for a Ruby on Rails application.</p>
-<p>In the RubyMine IDE, you should now see something like this when you open the 
-directory:</p>
-<p><img border="0" src="rubymine1.png" width="334" height="494"></p>
-<p>If you've cloned a Git repository, RubyMine should already be configured to 
-use Git as the VCS.&nbsp; Personally, I much prefer using SmartGit/Hg, but you 
-should know that RubyMine has built-in Git support.</p>
 <h3>Prequisites for Querying Facebook For Testing Purposes</h3>
 <p>A user access token is needed to obtain the friend location and hometown, 
 which we use to map where our friends are.&nbsp; For testing purposes, we can 
@@ -113,6 +70,49 @@ hometown and make this information public, then you should see something along
 the lines of:</p>
 <p><img border="0" src="fb2.png" width="535" height="395"></p>
 <p>We'll be parsing these records later in Ruby.</p>
+<h3>Prerequisites for GitHub</h3>
+<p>This part is optional.&nbsp; The source code for this project is available on 
+GitHub at <a href="https://github.com/cliftonm/WhereAreMyFriends">
+WhereAreMyFriends</a>.&nbsp; If you want to set up your own GitHub project, this 
+is what I did:</p>
+<ul>
+	<li>If you don't already have a GitHub account, create one</li>
+	<li>Create a new repository with a readme so you can immediately clone the 
+	repository</li>
+	<li>From the command line, clone the repository into the desired folder.&nbsp; 
+	I cloned mine using &quot;git clone
+	<a href="https://github.com/cliftonm/WhereAreMyFriends">
+	https://github.com/cliftonm/WhereAreMyFriends</a>&quot;</li>
+	<li>You can also simply clone my repository and use the code that I wrote, 
+	but you won't be able to commit any changes back to me.&nbsp; For that, 
+	you'd need to fork my repository and then issue &quot;pull requests&quot; if you want 
+	me to incorporate some changes in my project that you've made.</li>
+</ul>
+<h3>Prerequisites for Using Git</h3>
+<p>This is optional for two reasons: you can use the Git command line or you can 
+use RubyMine's Git integration for working with the repository.&nbsp; Personal, 
+I prefer to use a separate visual tool such as <a href="http://www.syntevo.com/smartgithg/">SmartGit/Hg</a>, which I've found 
+to be the best of the various visual tools for Git.&nbsp; </p>
+<h2>Getting Started</h2>
+<p>We've got a few housekeeping things to take care of before we get started 
+with actual coding.</p>
+<h3>Creating the Initial Rails App</h3>
+<p>If you've cloned my repository, ignore this step, as you can simply open the 
+directory in RubyMine.</p>
+<p>If you're starting from a blank slate because you want to walk through how I 
+wrote this app, then you'll need to create a Rails app.&nbsp; Again, from the 
+command line, go to the parent directory into which you create the directory and 
+contents for the project.&nbsp; If you've cloned a blank repository from GitHub, 
+don't worry, just do this as well.</p>
+<p>From the command line, type in &quot;rails new WhereAreMyFriends&quot; (or, if you gave 
+your project a different name, use that name.)&nbsp; This will create all the 
+pieces for a Ruby on Rails application.</p>
+<p>In the RubyMine IDE, you should now see something like this when you open the 
+directory:</p>
+<p><img border="0" src="rubymine1.png" width="334" height="494"></p>
+<p>If you've cloned a Git repository, RubyMine should already be configured to 
+use Git as the VCS.&nbsp; Personally, I much prefer using SmartGit/Hg, but you 
+should know that RubyMine has built-in Git support.</p>
 <h3>We Want Git to Ignore RubyMine Files</h3>
 <p>We don't want all the RubyMine IDE files to be part of the repository, so 
 open the &quot;.gitignore&quot; file (in the application's root folder) and add:</p>
@@ -139,6 +139,8 @@ Bing, and Mapquest.)</p>
 Facebook Query Language in Ruby, which I use to query the locations of my 
 friends.&nbsp; There are other options as well and other techniques for querying 
 Facebook, but this is the approach I've chosen.</p>
+<p>The Facebook FQL reference documentation can be found
+<a href="https://developers.facebook.com/docs/reference/fql/">here</a>.</p>
 <h4>slim</h4>
 <p><a href="https://github.com/slim-template/slim">This gem</a>, from the 
 website: &quot;is a template language whose goal is [to] reduce the syntax of 
@@ -165,6 +167,14 @@ Type:</p>
 so that we're using the slim HTML syntax rather than straight HTML.</p>
 <p>You should see something like this now in your project tree:</p>
 <p><img border="0" src="rubymine2.png" width="233" height="199"></p>
+<h3>Setting the Root Route</h3>
+<p>Finally, before we do anything else, let's set the root route to this page, 
+so we can get to it simply from &quot;localhost:3000&quot;.&nbsp; Edit the routes.rb file 
+(in the config folder), adding:</p>
+<pre>root to: &quot;map_my_friends#index&quot;</pre>
+<p>Note that when we created the page controller, the route:</p>
+<pre>get &quot;map_my_friends/index&quot;</pre>
+<p>was automatically added for us.</p>
 <h2>Start Coding!</h2>
 <p>Now we're ready to do some coding.&nbsp; First, we're going to create a basic 
 model, &quot;Friend&quot;, to hold the information about our friends.&nbsp; We could do 
@@ -220,10 +230,211 @@ end</pre>
 <p><img border="0" src="rubymine3.png" width="272" height="180"></p>
 <p>Now, run the migration by pressing Ctrl+F9, or right-clicking on the 
 migration and from the popup menu selecting &quot;run db:migrate&quot;.</p>
+<h3>Create Our Facebook Library</h3>
+<p>A &quot;standard&quot; practice in Ruby on Rails code is to put directly into the 
+controller all the code that's needed to render a page.&nbsp; So, typically, you 
+would see the code that queries Facebook and populates the model either in the 
+controller or in the model.&nbsp; Personally, I prefer to put this kind of code 
+into the lib folder and providing helper methods to interface to whatever model 
+supports the necessary fields.&nbsp; I've read some articles that disagree with 
+my on this point, saying that all business logic should go in the model.&nbsp; 
+The problem as I see it is that there is application-model-independent business 
+logic (as in, agnostic business logic), such as how we interface with Facebook, 
+that shouldn't go into the application's model because it is agnostic.</p>
+<p>However, because Rails does not auto-load the code in the lib folder, we have 
+to coerce it.&nbsp; Also note that files in the lib folder are don't 
+automatically cause the server to reload the Ruby script, so you'll have to 
+restart the server if you make changes in the lib folder's files.</p>
+<p>First, edit the application.rb file found in the app\config folder, adding 
+the line:</p>
+<pre>config.autoload_paths += %W(#{config.root}/lib/facebook_wrapper)</pre>
+<p>which tells Rails we specifically want to include files found in this folder.</p>
+<p>Second, in the lib folder, create a sub-folder called &quot;facebook_wrapper&quot;.</p>
+<p>Third, create a file in that sub-folder called &quot;facebook_wrapper.rb&quot;</p>
+<p>Your project structure should now look like this:</p>
+<p><img border="0" src="rubymine4.png" width="211" height="76"></p>
+<p>Now we're going to wrap our class, <code>FacebookWrapper</code>, in a module called 
+<code>FacebookWrapperModule</code>:</p>
+<pre>module FacebookWrapperModule
+  class FacebookWrapper
+    def ... my functions ...
+  end
+end</pre>
+<p>and implement the following functions.</p>
+<h4>get_fb_friends</h4>
+<p>This function returns an array of friends in Facebook structure:</p>
+<pre>def self.get_fb_friends
+  options = {access_token: &quot;[your access token goes here]&quot;}
+  friends = Fql.execute(&quot;SELECT uid, name, pic_square, current_address, current_location, hometown_location FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me())&quot;, options)
+
+  friends
+end</pre>
+<p><u>We will fix the hardcoded access token later</u> - for the moment, we just 
+want to get something up and running.</p>
+<h4>from_fb_friends</h4>
+<p>This function converts the Facebook friends array into an array of our model 
+instances, which we callback to the application to create each model instance.&nbsp; 
+Because Ruby is a duck-typing language, all the application needs to do is 
+implement attributes (properties) or methods for the attributes we expect to 
+initialize - we don't need to know the &quot;type&quot; or implement this as an interface, 
+as we would in C#.&nbsp; Furthermore, by utilizing the callback capability of 
+Ruby, we can request that the application instantiates its model instance 
+itself:</p>
+<pre>def self.from_fb_friends(fb_friends)
+  friends = []
+
+  fb_friends.each do |fb_friend|
+    location = get_location_or_hometown_address(fb_friend)
+
+    if !location.nil?  # or: unless location.nil?
+      friend = yield(fb_friend, location)
+      friends &lt;&lt; friend
+    end
+  end
+
+  friends
+end</pre>
+<p>Another Ruby-ism is to use the &quot;unless&quot; keyword rather than &quot;if !&quot; (if not), 
+which I personally find reduces the readability of the code.&nbsp; I have no 
+problem with negative logic, and saying &quot;unless location.nil?&quot; requires me to do 
+mental gyrations back to &quot;if locations does not equal nil.&quot;</p>
+<h4>get_location_or_hometown_address</h4>
+<p>Lastly, we have a private helper method for getting the address information 
+from either the friend's location (preferrable) or their hometown (a fallback):</p>
+<pre>private
+
+def self.get_location_or_hometown_address(fb_friend)
+  location = fb_friend[&quot;current_location&quot;]
+
+  if location.nil?
+   location = fb_friend[&quot;hometown_location&quot;]
+  end
+
+  location
+end</pre>
+<p>Note that we never explicitly use the &quot;return&quot; keyword.&nbsp; There's a 
+reason for that, which I'll illustrate next.</p>
+<h3>Update the Controller to Pass Along the Location Information</h3>
+<p>Next, we'll update the map_my_friends_controller.rb file, the controller for 
+our index.&nbsp; The first thing we need to do is 
+reference our facebook_wrapper library helper.&nbsp; This reveals some of the 
+intricacies of Ruby's module and file handling.</p>
+<p>First, we need to tell Ruby that we &quot;require&quot; the facebook_wrapper.rb 
+file (which it knows how to get because we added lib\facebook_wrapper to the 
+auto_load config paths):</p>
+<pre>require 'facebook_wrapper'</pre>
+<p>Then, we need to tell Ruby that we want to use the objects defined in the 
+<code>FacebookWrapperModule</code>:</p>
+<pre>include FacebookWrapperModule</pre>
+<p></p>
+<p></p>
+
+<p>If we don't do this, we have to qualify the the objects with &quot;FacebookWrapperModule::&quot;&nbsp; 
+The &quot;include&quot; keyword is similar to the &quot;using&quot; keyword in C#, and the &quot;module&quot; 
+keyword is similar to the &quot;namespace&quot; keyword.&nbsp; The only thing new here is 
+the dynamic loading of a dependent file facebook_wrapper.rb.</p>
+<p>The implementation for the <code>index</code> method gathers the arrays and 
+provides the callback method for populating a model (Friend) instance for each 
+instance of a Facebook structure, and finally that array is formatted as json 
+and passed back to the client:</p>
+<pre>class MapMyFriendsController &lt; ApplicationController
+  def index
+    fb_friends = FacebookWrapper.get_fb_friends
+    @friends = FacebookWrapper.from_fb_friends(fb_friends) { |fb_friend, location|
+        friend = Friend.new
+        friend.uid = fb_friend[&quot;uid&quot;]
+        friend.name = fb_friend[&quot;name&quot;]
+        friend.pic = fb_friend[&quot;pic_square&quot;]
+        friend.address = location[&quot;name&quot;]
+        friend.latitude = location[&quot;latitude&quot;]
+        friend.longitude = location[&quot;longitude&quot;]
+        friend.gmaps = true
+
+        friend
+    }
+
+    @json = @friends.to_gmaps4rails
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @friends }
+    end
+  end
+end</pre>
+<p><u>Note that we do not call &quot;return friend&quot; in the callback code</u> - if we 
+do this, it's treated as a return from the calling code and the @friends 
+property is never initialized!</p>
+<h3>Getting the View to Render the Map</h3>
+<p>Edit the index.html.slim file (in the app\views\map_my_friends folder), 
+adding this one line as the entire contents of the file:</p>
+<pre>= gmaps4rails(@json)</pre>
+<h4>Test This</h4>
+<p>If you run the application (with a current user access token), you should see 
+your friends mapped onto a google map:</p>
+<p><img border="0" src="screenshot2.png" width="829" height="489"></p>
+<h4>Making the Map Bigger</h4>
+<p>However, what we'd to do is make the map bigger, so that it takes up most of 
+a full-screen browser window (I do everything in full screen which is why I like 
+this).&nbsp; To do this, replace the line that we created above with:</p>
+<pre>= gmaps( :map_options =&gt; { :container_class =&gt; &quot;my_map_container&quot; }, &quot;markers&quot; =&gt; {&quot;data&quot; =&gt; @json, &quot;options&quot; =&gt; {&quot;auto_zoom&quot; =&gt; false} })</pre>
+<p>and edit the map_my_friends.css.scss (found in the app\assets\stylesheets 
+folder), adding:</p>
+<pre>div.my_map_container {
+  padding: 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc #ccc #999 #ccc;
+  -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+  -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+  box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+  width: 1000px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+div.my_map_container #map {
+  width: 1000px;
+  height: 800px;
+}</pre>
+<p>Refresh the browser and you will get bigger map, as illustrated at the 
+beginning of this article.</p>
+<h3>Adding Some Pizzazz to the Thumbnail Popup</h3>
+<p>First, we'll add &quot;profile_url&quot; to the FQL query that we're using, and adjust 
+our model and controller accordingly.&nbsp; We also need to add a migration to 
+add this field to the Friend table:</p>
+<pre>class AddProfileUrlField &lt; ActiveRecord::Migration
+  def change
+    add_column :friends, :profile_url, :string
+  end
+end</pre>
+<p>Next, we provide some HTML to render in the Google Maps info window:</p>
+<pre>def gmaps4rails_infowindow
+  &quot;&lt;p&gt;&lt;a href = '#{profile_url}' target='_blank'&gt;#{name}&lt;/a&gt;&lt;br&gt;#{address}&lt;br&gt;&lt;img src = '#{pic}'/&gt;&lt;/p&gt;&quot;
+end</pre>
+<p>and the result is:</p>
+<p><img border="0" src="christian.png" width="290" height="282"></p>
+<p>showing us:</p>
+<ul>
+	<li>the person's name as a clickable link to their Facebook profile that 
+	opens in a new window</li>
+	<li>their location/hometown</li>
+	<li>and their Facebook picture.&nbsp; </li>
+</ul>
+<h2>Omniauth-Facebook</h2>
+<p>Now that we have a basic application running, let's deal with a different set 
+of complexity which will also resolve the pesky user access token expiration 
+problem.&nbsp; The issue is this - rather than gathering our friends, we need 
+authorization to gather the friends of anyone that visits our site, which means 
+that we'll need the ability for users to log in using their Facebook login and 
+authorize us to query their data.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<p>Acknowledgements:</p>
+<p>
+<a href="http://stackoverflow.com/questions/5297629/gmaps4rails-setting-map-width-and-height">
+Abram, who provided the code for resizing the google map</a></p>
+<p>
+<a href="http://railscasts.com/episodes/360-facebook-authentication?view=asciicast">
+Ryan Bates, for his great RailsCast on omniath-facebook</a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
