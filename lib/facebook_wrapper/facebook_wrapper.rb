@@ -2,8 +2,8 @@ module FacebookWrapperModule
   class FacebookWrapper
     # Returns an array of friends, the array structure is that returned by Facebook from FQL.
     # Example usage: fb_friends = FacebookWrapper.get_fb_friends
-    def self.get_fb_friends
-      options = {access_token: "CAACEdEose0cBAOvviyokb2ZC1ZCfqNf3KaXQLeutbIGbiUDNNZCLv32RrTfmfiCbcJRyT3C1wCYxBfhz1Yc4vZAn7gNLkYu87u4NZB108pdHpiz1wZAzf4bXVCZAeP2AriOcAhGXrYcLDCPEEKVMn51VfWCiplOMFOow8mumYR87XUnw3WY0qYiiJkZCwIbZBQxIqBPPluRPAOAZDZD"}
+    def self.get_fb_friends(oauth_token)
+      options = {access_token: oauth_token}
       friends = Fql.execute("SELECT uid, name, pic_square, current_address, current_location, hometown_location, profile_url FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me())", options)
 
       friends

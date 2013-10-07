@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 20131006224517) do
 
   create_table "friends", :force => true do |t|
     t.string   "uid"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(:version => 2) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "profile_url"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.string   "oauth_token"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

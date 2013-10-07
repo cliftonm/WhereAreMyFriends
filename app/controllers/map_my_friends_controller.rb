@@ -3,8 +3,26 @@ include FacebookWrapperModule
 
 class MapMyFriendsController < ApplicationController
   def index
-    fb_friends = FacebookWrapper.get_fb_friends
-    @friends = FacebookWrapper.from_fb_friends(fb_friends) { |fb_friend, location|
+    user_id = session[:user_id]
+    @friends = []
+
+    if !user_id.nil?
+      oauth_token = User.find(user_id).oauth_token
+      @friends = get_friends(oauth_token)
+    end
+
+    @json = @friends.to_gmaps4rails
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @friends }
+    end
+  end
+
+  private
+
+  def get_friends(oauth_token)
+    fb_friends = FacebookWrapper.get_fb_friends(oauth_token)
+    friends = FacebookWrapper.from_fb_friends(fb_friends) { |fb_friend, location|
       friend = Friend.new
       friend.uid = fb_friend["uid"]
       friend.name = fb_friend["name"]
@@ -18,10 +36,6 @@ class MapMyFriendsController < ApplicationController
       friend
     }
 
-    @json = @friends.to_gmaps4rails
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @friends }
-    end
+    friends
   end
 end

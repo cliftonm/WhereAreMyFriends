@@ -1,3 +1,8 @@
+ul
+  - flash.each do |key, msg|
+    = content_tag :li, msg, id: key
+p
+= link_to 'Sign in with Facebook', signin_path
 = gmaps( :map_options => { :container_class => "my_map_container" }, "markers" => {"data" => @json, "options" => {"auto_zoom" => false} })
 
 

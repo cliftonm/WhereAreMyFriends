@@ -70,6 +70,19 @@ hometown and make this information public, then you should see something along
 the lines of:</p>
 <p><img border="0" src="fb2.png" width="535" height="395"></p>
 <p>We'll be parsing these records later in Ruby.</p>
+<h3>Prerequisites for Connecting to Facebook</h3>
+<p>Windows is lacking SSL information which will result in an SSL authentication 
+failure.&nbsp; To correct this problem, follow exactly these instructions:</p>
+<ol>
+	<li>Download <a rel="nofollow" href="http://curl.haxx.se/ca/cacert.pem">
+	http://curl.haxx.se/ca/cacert.pem</a> into c:\railsinstaller\cacert.pem 
+	</li>
+	<li>Go to your Computer -&gt; Advanced Settings -&gt; Environment Variables</li>
+	<li>Create a new System Variable:
+	<p>Variable: SSL_CERT_FILE</p>
+	<p>Value: C:\RailsInstaller\cacert.pem</li>
+</ol>
+<p>For some reason, it originally took me three tries to get this right.</p>
 <h3>Prerequisites for GitHub</h3>
 <p>This part is optional.&nbsp; The source code for this project is available on 
 GitHub at <a href="https://github.com/cliftonm/WhereAreMyFriends">
@@ -416,8 +429,8 @@ end</pre>
 <ul>
 	<li>the person's name as a clickable link to their Facebook profile that 
 	opens in a new window</li>
-	<li>their location/hometown</li>
-	<li>and their Facebook picture.&nbsp; </li>
+<li>their location/hometown</li>
+<li>and their Facebook picture.&nbsp; </li>
 </ul>
 <h2>Omniauth-Facebook</h2>
 <p>Now that we have a basic application running, let's deal with a different set 
@@ -426,16 +439,150 @@ problem.&nbsp; The issue is this - rather than gathering our friends, we need
 authorization to gather the friends of anyone that visits our site, which means 
 that we'll need the ability for users to log in using their Facebook login and 
 authorize us to query their data.</p>
+<h3>Add omniauth-facebook to the Gemfile</h3>
+<p>First, add:</p>
+<pre>gem 'omniauth-facebook'</pre>
+<p>to the Gemfile found in your root folder.&nbsp; The gems we've now added to 
+the Gemfile are:</p>
+<pre>gem 'gmaps4rails'
+gem 'fql'
+gem 'slim'
+gem 'thin'
+gem 'omniauth-facebook'</pre>
+<h3>Create a User Model</h3>
+<p>This time, let's create the user model with the model generator.&nbsp; From 
+RubyMine's Tool menu, select &quot;Run Rails Generator&quot; then double-click on 
+&quot;model&quot;.&nbsp; Enter the options for the rails generator:</p>
+<pre><code>User provider:string uid:string name:string email:string oauth_token:string</code></pre>
+<p><img border="0" src="usermodel.png" width="467" height="328"></p>
+<p>This creates a new migration file, so find it under db\migrate, right click 
+on it and select &quot;Run 'db:migrate' &quot;</p>
+<p>In the newly create User model, add the following code:</p>
+<pre>def self.create_with_omniauth(auth)
+  create! do |user|
+    user.provider = auth.provider
+    user.uid = auth.uid
+    user.oauth_token = auth.credentials.token
+
+    if auth.info
+      user.name = auth.info.name || &quot;&quot;
+      user.email = auth.info.email || &quot;&quot;
+    end
+  end
+end</pre>
+<p>This code creates a user in the database with the provided authentication 
+information.</p>
+<p>Notice that we have access here to the user access token, which is saved in 
+the field oauth_token.</p>
+<h3>Setup Authentication</h3>
+<p>In the config\initializers folder, create the file omniauth.rb with the 
+contents:</p>
+<pre>Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :facebook, <code>ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'],</code>
+            :scope =&gt; 'friends_location, friends_hometown',
+           :display =&gt; 'popup'
+end</pre>
+<p>This informs omniauth that we're authenticating with facebook.&nbsp; Notice 
+the &quot;scope&quot; key, whose values are &quot;friends_location&quot; and &quot;friends_hometown&quot;, 
+which specifies the information in which we are interested.</p>
+<h3>Setup Environment Variables</h3>
+<p>Personally, I don't like environment variables - I would rather use a file 
+that isn't stored in the Git repository.&nbsp;
+<a href="http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails">
+Previously</a>, I've used a &quot;local_env.yml&quot; file.</p>
+<p>Edit the application.rb file (located in the config) folder, and add:</p>
+<pre>config.before_configuration do
+  env_file = File.join(Rails.root, 'config', 'local_env.yml')
+  YAML.load(File.open(env_file)).each do |key, value|
+    ENV[key.to_s] = value
+  end if File.exists?(env_file)
+end</pre>
+<p>This code adds additional items to the ENV collection.&nbsp; Now we need to 
+create the file.&nbsp; In the config folder, create the file 'local_env.yml', 
+whose contents are:</p>
+<pre>FACEBOOK_KEY: '[your key]'
+FACEBOOK_SECRET: '[your secret id]'</pre>
+<p>Make sure that when you put in your key and secret ID, that you preserve the 
+single quotes.</p>
+<h3>Create the Sessions Controller</h3>
+<p>In the app\controllers folder, create the file &quot;sessions_controller.rb&quot;, 
+whose contents are:</p>
+<pre>class SessionsController &lt; ApplicationController
+
+  def new
+    redirect_to '/auth/facebook'
+  end
+
+  def create
+    auth = request.env[&quot;omniauth.auth&quot;]
+    user = User.where(:provider =&gt; auth['provider'], 
+                      :uid =&gt; auth['uid']).first || User.create_with_omniauth(auth)
+    session[:user_id] = user.id
+    redirect_to root_url, :notice =&gt; &quot;Signed in!&quot;
+    end
+
+  def destroy
+    # don't use User.find, as this throws an exception, RecordNotFound
+    user = User.find_by_id(session[:user_id])
+
+    if !user.nil?
+      User.find(session[:user_id]).delete
+      reset_session
+      session[:user_id] = nil
+    end
+
+    redirect_to root_url, notice: 'Signed out!'
+  end
+end</pre>
+<p>This handles three routes:</p>
+<ul>
+	<li>new - simply redirects to the facebook authentication page</li>
+	<li>create - performs the sign in, registering the user in the database if 
+	the uid is unique for this provider (being Facebook)</li>
+	<li>destroy - signs out from Facebook and removes the user's uid from the 
+	database, forcing the user to sign in again (useful for testing and getting 
+	a new authentication token)</li>
+</ul>
+<h3>Create the Necessary Routes</h3>
+<p>Add the following routes to the routes.rb file (in the config folder):</p>
+<pre>match '/auth/:provider/callback' =&gt; 'sessions#create'
+match '/signout' =&gt; 'sessions#destroy'
+match '/signin' =&gt; 'sessions#new'</pre>
+<h3>Update the Home Page View</h3>
+<p>In our view that displays the Google Map, we now want to add to the view:</p>
+<ul>
+	<li>sign in / sign out notification messages</li>
+	<li>a sign in / sign out button</li>
+</ul>
+<p>Edit the index.html.slim file (in the app\views\map_my_friends folder), 
+inserting at the top of the file:</p>
+<h3>Change the User Access Token to Use the oauth_token</h3>
+<p>In our map_my_friends_controller, we're going to pass in the access token, 
+which we acquire from the database with the user's id stored when the session 
+was created.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>Acknowledgements:</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Acknowledgements</h2>
+<p>I'm indebted specifically to the following people who have no idea that they 
+helped me put all this together!&nbsp; This of course omits all the people that 
+have put in countless hours writing Ruby, Rails, and all these amazing gems.</p>
 <p>
 <a href="http://stackoverflow.com/questions/5297629/gmaps4rails-setting-map-width-and-height">
 Abram, who provided the code for resizing the google map</a></p>
 <p>
 <a href="http://railscasts.com/episodes/360-facebook-authentication?view=asciicast">
 Ryan Bates, for his great RailsCast on omniath-facebook</a></p>
-<p>&nbsp;</p>
+<p><a href="https://github.com/ralphos/omniauth-facebook-example">Ralphos, for 
+his omniauth-facebook-example code</a></p>
+<p>
+<a href="http://stackoverflow.com/questions/5720484/how-to-solve-certificate-verify-failed-on-windows">
+DevDude, for providing a solution to the SSL certification error issue</a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
